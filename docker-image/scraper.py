@@ -1,4 +1,4 @@
-import requests, json
+import requests, time
 from bs4 import BeautifulSoup
 '''
 Example JSON response of trail status
@@ -24,18 +24,11 @@ Example JSON response of trail status
 '''
 
 
-status = requests.get('https://www.trianglemtb.com/mobiletrailstatus.php')
-
-soup = BeautifulSoup(status.content, 'html.parser')
-
-trails = soup.find_all('tr')
-
 class Trail:
 
     def __init__(self, trail):
         self.trail = trail
         self.name = None
-        self.status = None
     
     def getNameAndDate(self):
         nameAndDate = self.trail.find_all('td', class_ = 'trail')
@@ -53,18 +46,32 @@ class Trail:
             self.status = 'open'
         else:
             self.status = 'closed'
-allTrailData = []
-for trail in trails:
-    trailData = {}
-    currentTrail = Trail(trail)
-    currentTrail.getNameAndDate()
-    currentTrail.getStatus()
-    if currentTrail.name:
-        trailData['trail'] = currentTrail.name
-        trailData['status'] = currentTrail.status
-        trailData['last_updated'] = currentTrail.date
-        allTrailData.append(trailData)
-    else:
-        next
-result = {'data':allTrailData}
-print(json.dumps(result, indent=2))
+
+def main():
+    response = requests.get('https://www.trianglemtb.com/mobiletrailstatus.php')
+
+    soup = BeautifulSoup(response.content, 'html.parser')
+
+    trails = soup.find_all('tr')
+
+    allTrailData = []
+    for trail in trails:
+        trailData = {}
+        currentTrail = Trail(trail)
+        currentTrail.getNameAndDate()
+        currentTrail.getStatus()
+        if currentTrail.name:
+            trailData['trail'] = currentTrail.name
+            trailData['status'] = currentTrail.status
+            trailData['last_updated'] = currentTrail.date
+            allTrailData.append(trailData)
+        else:
+            next
+    metadata = {}
+    metadata['query_time'] = time.ctime()
+    metadata['status_code'] = response.status_code
+    result = {
+            'metadata': metadata,
+            'data':allTrailData
+            }
+    return result
