@@ -4,6 +4,7 @@ Scrapes the local mountain bike trail status page https://www.trianglemtb.com/mo
 Try it out yourself! 
 
 On Linux and Mac, `curl https://api.nashluffman.com/trails` 
+
 On Windows, switch to linux-based OS
 
 Example response
