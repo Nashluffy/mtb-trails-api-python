@@ -7,7 +7,7 @@ On Linux and Mac, `curl https://api.nashluffman.com/trails`
 On Windows, switch to linux-based OS
 
 Example response
-'''
+'''json
 {
   "metadata": {
     "query_time": "Sun Jun  7 02:57:44 2020",
