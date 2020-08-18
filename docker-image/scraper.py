@@ -46,6 +46,10 @@ class Trail:
             self.status = 'open'
         else:
             self.status = 'closed'
+    
+    def getUrl(self):
+        trailUrlPhp = self.trail.find('a', href=True)
+        self.url = 'https://www.trianglemtb.com/{}'.format(trailUrlPhp['href'])
 
 def main():
     response = requests.get('https://www.trianglemtb.com/mobiletrailstatus.php')
@@ -59,11 +63,13 @@ def main():
         trailData = {}
         currentTrail = Trail(trail)
         currentTrail.getNameAndDate()
-        currentTrail.getStatus()
         if currentTrail.name:
+            currentTrail.getStatus()
+            currentTrail.getUrl()
             trailData['trail'] = currentTrail.name
             trailData['status'] = currentTrail.status
             trailData['last_updated'] = currentTrail.date
+            trailData['trail_info'] = currentTrail.url
             allTrailData.append(trailData)
         else:
             next

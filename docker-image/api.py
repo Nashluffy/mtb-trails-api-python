@@ -16,4 +16,3 @@ if __name__ == '__main__':
     app.logger.handlers = gunicorn_logger.handlers
     app.logger.setLevel(gunicorn_logger.level)
     app.run(host="0.0.0.0", port=5000, debug=True)
-
