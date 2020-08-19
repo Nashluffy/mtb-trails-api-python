@@ -7,7 +7,7 @@ app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
 
-@app.route('/', methods=['GET'])
+@app.route('/trails', methods=['GET'])
 def home():
     return json.dumps(scraper.main(), indent=2)
 

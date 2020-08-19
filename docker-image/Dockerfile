@@ -5,5 +5,5 @@ ADD requirements.txt /app/requirements.txt
 RUN pip3 install -r /app/requirements.txt
 ADD . /app
 ENV PORT 8080
-CMD ["gunicorn3", "api:app", "--log-level=debug"]
+CMD ["gunicorn", "api:app", "--log-level=debug"]
 MAINTAINER Nash Luffman "nashluffman@gmail.com"
