@@ -1,4 +1,4 @@
-# trailsAPI
+# mtb-trails-api-python
 Scrapes the local mountain bike trail status page https://www.trianglemtb.com/mobiletrailstatus.php into JSON
 
 Try it out yourself! 
