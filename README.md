@@ -1,3 +1,5 @@
+# Repository is archived as trianglemtb.com is moving to trail forks, which has its own API
+------
 # mtb-trails-api-python
 Scrapes the local mountain bike trail status page https://www.trianglemtb.com/mobiletrailstatus.php into JSON
 
